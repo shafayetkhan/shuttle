@@ -1,0 +1,18 @@
+* Shuttle
+- Utility to move generic files from one directory to another.
+- Move files in current directory, as well as desired files inside child directories within the current
+  directory.
+- Use Cron jobs to schedule transfers in the future
+
+
+* Configs
+- Store all configs in JSON format
+
+* Design
+- Design a class called Repository. The repository is essentially the current
+  directory where the utility is launched from.
+- The source attribute is the current directory.
+- If a destination attribute is not already set, prompt the user for a
+  destination and store it in the config file.
+- Store attributes for Movies, Documents, Images with the most common formats.
+- The repository object can move files only, directories only, or both.
