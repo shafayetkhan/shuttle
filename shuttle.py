@@ -10,19 +10,21 @@ class Repository(object):
     be moved. Directories within repositories containing desired type of file is
     moved as well. """
 
-    def __init__(self):
-        self.src = os.getcwd()
+    def __init__(self, source=None):
+        self.src = source
+        if source is None:
+            self.src = os.getcwd()
         self.dest = None
         self.directory_list = os.listdir(self.src)
         self.list_of_files = os.walk(self.src)
         self.extensions = []
 
     def move(self):
-    """Method is called when everthing is staged and ready to be moved. Files are
-       simpler to move; directories require more handlers."""
+        """Method is called when everthing is staged and ready to be moved. Files are
+        simpler to move; directories require more handlers."""
         for dir_path, dir_names, filenames in self.list_of_files:
             for _file in filenames:
-                extension = os.path.splitext(file)[1]
+                extension = os.path.splitext(_file)[1]
                 source = os.path.join(dir_path, _file)
                 destination = os.path.join(self.dest, _file)
 
@@ -33,9 +35,9 @@ class Repository(object):
                     self.move_directory(dir_path)
 
     def move_directory(self, dir_path):
-    """Method is called when a directory containing desired file types
-       have been found. Directory path is resolved recursively based on whether
-       the directory is part of directory_list """
+        """Method is called when a directory containing desired file types
+        have been found. Directory path is resolved recursively based on whether
+        the directory is part of directory_list """
         directory = self.get_directory(dir_path)
         dest_folder = os.path.join(self.dest, os.path.basename(directory))
         print 'Moving directory: %s to %s\n' % (directory, dest_folder)
@@ -43,10 +45,10 @@ class Repository(object):
             shutil.move(directory, dest_folder)
 
     def get_directory(self, dir_path):
-    """Method is called recursively to resolve the directory path at the root
-       of the repository. """
+        """Method is called recursively to resolve the directory path at the root
+        of the repository. """
         folder_name = os.path.basename(dir_path)
-        if folder_name in self.list_dir:
+        if folder_name in self.directory_list:
             return dir_path
         else:
             parent_dir = os.path.dirname(dir_path)
