@@ -1,5 +1,16 @@
 #!/usr/local/bin/env python
 
+"""
+    shuttle
+    ~~~~~~~
+    
+    Simple utility to move around files from one place to another.
+    
+    :author: Shafayet Khan
+
+"""
+
+
 import os
 import shutil
 
